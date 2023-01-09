@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "main.h"
 
-int give_change(int money);
+int change(int cents);
 
 /**
  * main - prints the minimum number of coins to make change
@@ -21,17 +20,17 @@ int main(int argc, char *argv[])
 	else if (argc < 0)
 		return (0);
 
-	printf("%d\n", give_change(atoi(argv[1])));
+	printf("%d\n", change(atoi(argv[1])));
 	return (0);
 }
 
 /**
- * give_change - find the minimum number of coins to make change
+ * change - find the minimum number of coins to make change
  * for an amount of money
  * @cents: amount of money given in singles.
  * Return: min amount of coins. (INT)
  */
-int give_change(int cents)
+int change(int cents)
 {
 	int q = 25, d = 10, n = 5, t = 2, p = 1;
 	int coins;
