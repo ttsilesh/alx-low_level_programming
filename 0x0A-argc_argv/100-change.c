@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "main.h"
 
 int give_change(int money);
 
@@ -12,57 +13,57 @@ int give_change(int money);
  */
 int main(int argc, char *argv[])
 {
-	int money = change = 0;
-
 	if (argc != 2)
 	{
 		printf("Error\n");
 		return (1);
 	}
-	money = atoi(argv[1]);
-	change = give_change(money);
+	else if (argc < 0)
+		return (0);
 
-	printf("%d\n", change);
+	printf("%d\n", give_change(atoi(argv[1])));
 	return (0);
 }
 
 /**
  * give_change - find the minimum number of coins to make change
  * for an amount of money
- * @money: amount of money given in singles.
+ * @cents: amount of money given in singles.
  * Return: min amount of coins. (INT)
  */
-int give_change(int money)
+int give_change(int cents)
 {
-	int one, two, five, ten, tf, sum;
+	int q = 25, d = 10, n = 5, t = 2, p = 1;
+	int coins;
 
-	sum = one = two = five = ten = tf = 0;
+	while (cents > 0)
+	{
+		while (cents >= q)
+		{
+			cents -= q;
+			coins++;
+		}
+		while (cents >= d)
+		{
+			cents -= d;
+			coins++;
+		}
+		while (cents >= n)
+		{
+			cents -= n;
+			coins++;
+		}
+		while (cents >= t)
+		{
+			cents -= t;
+			coins++;
+		}
+		while (cents >= p)
+		{
+			cents -= p;
+			coins++;
+		}
+	}
+	return (coins);
 
-	if (money <= 0)
-		return (0);
-	if (money >= 25)
-	{
-		tf = money / 25;
-		money -= tf * 25;
-	}
-	if (money < 25 && money >= 10)
-	{
-		ten = money / 10;
-		money -= ten * 10;
-	}
-	if (money < 10 && money >= 5)
-	{
-		five = money / 5;
-		money -= five * 5;
-	}
-	if (money < 5 && money >= 2)
-	{
-		two = money / 2;
-		money -= two * 2;
-	}
-	if (money < 2)
-		one = money;
-
-	sum = tf + ten + five + two + one;
-	return (sum);
 }
