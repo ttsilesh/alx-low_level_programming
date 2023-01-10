@@ -8,45 +8,27 @@
  */
 char **strtow(char *str)
 {
-	int i = 0, w = 0, j = 0, k, count = 0, m, wordf;
-	char **p, *x;
+	int i = 0, w = 0, j = 0, k, con = 0, m, wordf;
+	char **d;
 
-	if (*str == '\0' || str == NULL)
+	if (str == NULL)
 		return (NULL);
-	for (i = 0; str[i] != '\0'; i++)
-		if (str[i] == ' ' && (str[i + 1] != ' ' || str[i + 1] == '\0'))
-			w++;
-	p = (char **)malloc((w + 1) * sizeof(char *));
-	if (p == NULL)
+	for (i = 0 ; str[i] != '\0' ; i++)
+		if (str[i] != 32)
+			con++;
+	d = malloc(sizeof(char) * con);
+	if (d == NULL)
 		return (NULL);
-	for (wordf = 0; str[wordf] && j <= w; wordf++)
+	for (i = 0 ; str[i] != '\0' ; i++)
 	{
-		count = 0;
-		if (str[wordf] != ' ')
+		if (str[i] != 32)
 		{
-			for (i = wordf ; str[i] != '\0'; i++)
-			{
-				if (str[i] == ' ')
-					break;
-				count++;
-			}
-			*(p + j) = (char *)malloc((count + 1) * sizeof(char));
-			if (*(p + j) == NULL)
-			{
-				for (k = 0; k <= j; k++)
-				{
-					x = p[k];
-					free(x);
-				}
-				free(p);
-				return (NULL);
-			}
-			for (m = 0; wordf < i; wordf++, m++)
-				p[j][m] = str[wordf];
-			p[j][m] = '\0';
+			*d[j] = str[i];
 			j++;
 		}
+		else
+		{
+		}
 	}
-	p[j] = NULL;
-	return (p);
+	return (d);
 }
