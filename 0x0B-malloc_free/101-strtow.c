@@ -24,8 +24,12 @@ char **strtow(char *str)
 		count = 0;
 		if (str[wordf] != ' ')
 		{
-			for (i = wordf ; str[i] != '\0' && str[i] == ' '; i++)
+			for (i = wordf ; str[i] != '\0'; i++)
+			{
+				if (str[i] == ' ')
+					break;
 				count++;
+			}
 			*(p + j) = (char *)malloc((count + 1) * sizeof(char));
 			if (*(p + j) == NULL)
 			{
