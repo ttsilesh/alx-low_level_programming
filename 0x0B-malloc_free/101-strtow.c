@@ -11,7 +11,7 @@ char **strtow(char *str)
 	int i, j = 0, w = 0, k, count = 0, m, wordf;
 	char **p, *x;
 
-	if (*str == '\0' || str == NULL || str == "")
+	if (*str == '\0' || str == NULL)
 		return (NULL);
 	for (i = 0 ; str[i] != '\0' ; i++)
 		if (str[i] == ' ' && (str[i + 1] != ' ' || str[i + 1] == '\0'))
