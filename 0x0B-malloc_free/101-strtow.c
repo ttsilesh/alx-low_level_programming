@@ -33,6 +33,11 @@ char **strtow(char *str)
 			*(p + j) = (char *)malloc((count + 1) * sizeof(char));
 			if (*(p + j) == NULL)
 			{
+				for (k = 0; k <= j; k++)
+				{
+					x = p[k];
+					free(x);
+				}
 				free(p);
 				return (NULL);
 			}
