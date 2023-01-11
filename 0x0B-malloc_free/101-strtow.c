@@ -19,7 +19,7 @@ char **strtow(char *str)
 	p = (char **)malloc((w + 1) * sizeof(char *));
 	if (p == NULL)
 		return (NULL);
-	for (wordf = 0; str[wordf] != '\0' && j <= w; wordf++)
+	for (wordf = 0; str[wordf] && j <= w; wordf++)
 	{
 		count = 0;
 		if (str[wordf] != ' ')
