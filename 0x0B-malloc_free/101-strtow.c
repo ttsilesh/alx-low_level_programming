@@ -24,17 +24,16 @@ char **strtow(char *str)
 		count = 0;
 		if (str[wordf] != ' ')
 		{
-			for (i = wordf ; str[i] != '\0'; i++)
-			{
-				if (str[i] == ' ')
-					break;
+			for (i = wordf ; (str[i] != '\0') && (str[i] == ' '); i++)
 				count++;
-			}
 			*(p + j) = (char *)malloc((count + 1) * sizeof(char));
 			if (*(p + j) == NULL)
 			{
 				for (k = 0; k <= j; k++)
-					free(p[k]);
+				{
+					x = p[k];
+					free(x);
+				}
 				free(p);
 				return (NULL);
 			}
