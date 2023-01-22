@@ -3,7 +3,6 @@
 
 int _strlen(char *str);
 char *_strcopy(char *dest, char *src);
-dog_t *new_dog(char *name, float age, char *owner);
 
 /**
  * _strlen - Finds the length of a string.
@@ -48,28 +47,38 @@ char *_strcopy(char *dest, char *src)v
 
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *doggo;
+	dog_t *cutie_dog;
+	int name_l = 0, own_l = 0;
 
-	if (name == NULL || age < 0 || owner == NULL)
-		return (NULL);
-	doggo = malloc(sizeof(dog_t));
-	if (doggo == NULL)
-		return (NULL);
-	doggo->name = malloc(sizeof(char) * (_strlen(name) + 1));
-	if (doggo->name == NULL)
+	if (name != NULL && owner != NULL)
 	{
-		free(doggo);
-		return (NULL);
+		name_l = _strlen(name) + 1;
+		own_l = _strlen(owner) + 1;
+		cutie_dog = malloc(sizeof(dog_t));
+
+		if (cutie_dog == NULL)
+			return (NULL);
+
+		cutie_dog->name = malloc(sizeof(char) * name_l);
+
+		if (cutie_dog->name == NULL)
+		{
+			free(cutie_dog);
+			return (NULL);
+		}
+
+		cutie_dog->owner = malloc(sizeof(char) * own_l);
+
+		if (cutie_dog->owner == NULL)
+		{
+			free(cutie_dog->name);
+			free(cutie_dog);
+			return (NULL);
+		}
+
+		cutie_dog->name = _strcpy(cutie_dog->name, name);
+		cutie_dog->owner = _strcpy(cutie_dog->owner, owner);
+		cutie_dog->age = age;
 	}
-	doggo->owner = malloc(sizeof(char) * (_strlen(owner) + 1));
-	if (doggo->owner == NULL)
-	{
-		free(doggo->name);
-		free(doggo);
-		return (NULL);
-	}
-	doggo->name = _strcopy(doggo->name, name);
-	doggo->age = age;
-	doggo->owner = _strcopy(doggo->owner, owner);
-	return (doggo);
+	return (cutie_dog);
 }
