@@ -14,7 +14,7 @@ int _strlen(char *str)
 {
 	int len = 0;
 
-	while (*str++)
+	while (str[len] != '\0')
 		len++;
 	return (len);
 }
@@ -27,13 +27,16 @@ int _strlen(char *str)
  * Return: The pointer to dest.
  */
 
-char *_strcopy(char *dest, char *src)v
+char *_strcopy(char *dest, char *src)
 {
-	int index = 0;
+	int len = 0, i;
 
-	for (index = 0; src[index]; index++)
-		dest[index] = src[index];
-	dest[index] = '\0';
+	while (src[len] != '\0')
+		len++;
+
+	for (i = 0; i < len; i++)
+		dest[i] = src[i];
+	dest[i] = '\0';
 	return (dest);
 }
 
@@ -47,38 +50,32 @@ char *_strcopy(char *dest, char *src)v
 
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *cutie_dog;
-	int name_l = 0, own_l = 0;
+	dog_t *dog;
+	int len1, len2;
 
-	if (name != NULL && owner != NULL)
+	len1 = _strlen(name);
+	len2 = _strlen(owner);
+	dog = malloc(sizeof(dog_t));
+	if (dog == NULL)
+		return (NULL);
+
+	dog->name = malloc(sizeof(char) * (len1 + 1));
+	if (dog->name == NULL)
 	{
-		name_l = _strlen(name) + 1;
-		own_l = _strlen(owner) + 1;
-		cutie_dog = malloc(sizeof(dog_t));
-
-		if (cutie_dog == NULL)
-			return (NULL);
-
-		cutie_dog->name = malloc(sizeof(char) * name_l);
-
-		if (cutie_dog->name == NULL)
-		{
-			free(cutie_dog);
-			return (NULL);
-		}
-
-		cutie_dog->owner = malloc(sizeof(char) * own_l);
-
-		if (cutie_dog->owner == NULL)
-		{
-			free(cutie_dog->name);
-			free(cutie_dog);
-			return (NULL);
-		}
-
-		cutie_dog->name = _strcpy(cutie_dog->name, name);
-		cutie_dog->owner = _strcpy(cutie_dog->owner, owner);
-		cutie_dog->age = age;
+		free(dog);
+		return (NULL);
 	}
-	return (cutie_dog);
+
+	dog->owner = malloc(sizeof(char) * (len2 + 1));
+	if (dog->owner == NULL)
+	{
+		free(dog);
+		free(dog->name);
+		return (NULL);
+	}
+	_strcpy(dog->name, name);
+	_strcpy(dog->owner, owner);
+	dog->age = age;
+
+	return (dog);
 }
