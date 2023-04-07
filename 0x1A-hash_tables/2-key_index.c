@@ -14,27 +14,3 @@ unsigned long int key_index(const unsigned char *key, unsigned long int size)
 
 	return (hash_djb2(key) % size);
 }
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-"2-key_index.c" [New File]                                    0,0-1         All
-
